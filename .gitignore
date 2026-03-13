@@ -1,1 +1,37 @@
 .DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.tmp_pdf_env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data and model artifacts
+data/raw/
+*.pt
+*.pth
+*.onnx
+*.ckpt
+
+# Experiment outputs
+results/*
+!results/.gitkeep
+experiments/logs/*
+!experiments/logs/.gitkeep
+experiments/results/*
+!experiments/results/.gitkeep
+
+# IDE / OS
+.vscode/
