@@ -1,0 +1,154 @@
+{
+  "seed": 42,
+  "ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.09999999999999995
+  },
+  "total_per_split": {
+    "train": 3085,
+    "val": 379,
+    "test": 397
+  },
+  "per_class_split_counts": {
+    "be_injured_by_a_collision": {
+      "train": 61,
+      "val": 7,
+      "test": 9
+    },
+    "clean_sample": {
+      "train": 814,
+      "val": 101,
+      "test": 103
+    },
+    "coating_cracking": {
+      "train": 28,
+      "val": 3,
+      "test": 4
+    },
+    "convex_powder": {
+      "train": 51,
+      "val": 6,
+      "test": 7
+    },
+    "crazing": {
+      "train": 240,
+      "val": 30,
+      "test": 30
+    },
+    "dirty_spot": {
+      "train": 167,
+      "val": 20,
+      "test": 22
+    },
+    "drain_bottom": {
+      "train": 226,
+      "val": 28,
+      "test": 29
+    },
+    "inclusion": {
+      "train": 240,
+      "val": 30,
+      "test": 30
+    },
+    "non_conducting": {
+      "train": 31,
+      "val": 3,
+      "test": 5
+    },
+    "orange_peel": {
+      "train": 72,
+      "val": 9,
+      "test": 9
+    },
+    "patches": {
+      "train": 239,
+      "val": 29,
+      "test": 31
+    },
+    "pitted_surface": {
+      "train": 240,
+      "val": 30,
+      "test": 30
+    },
+    "pitting": {
+      "train": 43,
+      "val": 5,
+      "test": 6
+    },
+    "rolled_in_scale": {
+      "train": 240,
+      "val": 30,
+      "test": 30
+    },
+    "scratches": {
+      "train": 240,
+      "val": 30,
+      "test": 30
+    },
+    "scuffing": {
+      "train": 116,
+      "val": 14,
+      "test": 16
+    },
+    "the_transverse_strip_is_dented": {
+      "train": 37,
+      "val": 4,
+      "test": 6
+    }
+  },
+  "class_source_datasets": {
+    "be_injured_by_a_collision": [
+      "ali2018"
+    ],
+    "clean_sample": [
+      "ali2018"
+    ],
+    "coating_cracking": [
+      "ali2018"
+    ],
+    "convex_powder": [
+      "ali2018"
+    ],
+    "crazing": [
+      "neu_det"
+    ],
+    "dirty_spot": [
+      "ali2018"
+    ],
+    "drain_bottom": [
+      "ali2018"
+    ],
+    "inclusion": [
+      "neu_det"
+    ],
+    "non_conducting": [
+      "ali2018"
+    ],
+    "orange_peel": [
+      "ali2018"
+    ],
+    "patches": [
+      "neu_det"
+    ],
+    "pitted_surface": [
+      "neu_det"
+    ],
+    "pitting": [
+      "ali2018"
+    ],
+    "rolled_in_scale": [
+      "neu_det"
+    ],
+    "scratches": [
+      "neu_det"
+    ],
+    "scuffing": [
+      "ali2018"
+    ],
+    "the_transverse_strip_is_dented": [
+      "ali2018"
+    ]
+  },
+  "manifest": "data\\splits_combined\\split_manifest.csv"
+}

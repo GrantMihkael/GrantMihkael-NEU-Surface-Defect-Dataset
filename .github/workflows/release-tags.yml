@@ -1,0 +1,24 @@
+name: Release Tag Validation
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  validate-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate semantic project tags
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          echo "Tag detected: $TAG"
+          case "$TAG" in
+            v0.1|v0.9|v1.0)
+              echo "Tag is allowed"
+              ;;
+            *)
+              echo "Unexpected tag: $TAG"
+              exit 1
+              ;;
+          esac

@@ -1,0 +1,7 @@
+{
+  "episodes": 80,
+  "reward_mean": 2.008750000000001,
+  "reward_min": -6.299999999999998,
+  "reward_max": 11.2,
+  "note": "Early RL curve is expected to be noisy and unstable."
+}

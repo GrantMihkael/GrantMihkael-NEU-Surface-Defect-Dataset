@@ -1,0 +1,34 @@
+{
+  "raw_dir": "data\\raw",
+  "cleaned_dir": "data\\cleaned_combined",
+  "total_images_seen": 3865,
+  "valid_images_copied": 3861,
+  "duplicates_removed": 4,
+  "invalid_removed": 0,
+  "missing_values_checked": true,
+  "label_standardization": "lowercase + underscore naming",
+  "dataset_mode": true,
+  "final_dataset_counts": {
+    "ali2018": 2062,
+    "neu_det": 1799
+  },
+  "final_class_counts": {
+    "ali2018/be_injured_by_a_collision": 77,
+    "ali2018/clean_sample": 1018,
+    "ali2018/coating_cracking": 35,
+    "ali2018/convex_powder": 64,
+    "ali2018/dirty_spot": 209,
+    "ali2018/drain_bottom": 283,
+    "ali2018/non_conducting": 39,
+    "ali2018/orange_peel": 90,
+    "ali2018/pitting": 54,
+    "ali2018/scuffing": 146,
+    "ali2018/the_transverse_strip_is_dented": 47,
+    "neu_det/crazing": 300,
+    "neu_det/inclusion": 300,
+    "neu_det/patches": 299,
+    "neu_det/pitted_surface": 300,
+    "neu_det/rolled_in_scale": 300,
+    "neu_det/scratches": 300
+  }
+}

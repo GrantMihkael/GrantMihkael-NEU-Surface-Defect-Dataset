@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+.env/
+
+# Data and generated artifacts
+data/raw/
+data/cleaned/
+data/cleaned_combined/
+data/splits/
+data/splits_combined/
+dataset/
+experiments/
+models/
+metrics/nlp_prototype_output.json
+
+# Jupyter
+*.ipynb_checkpoints
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
