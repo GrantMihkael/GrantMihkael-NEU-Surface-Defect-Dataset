@@ -1,0 +1,6 @@
+pillow
+matplotlib
+numpy
+pandas
+jupyter
+notebook
