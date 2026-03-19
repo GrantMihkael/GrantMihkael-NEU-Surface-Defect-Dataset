@@ -1,160 +1,143 @@
-# GitHub Issues to Create
+# Week 2 GitHub Issues to Create
 
-The following issues should be created in this order.
+The following Week 2 issues can be created in this order.
 
 Recommended common settings:
+
 - Milestone: `v0.1`
 - Project board: `Manufacturing Defect Detection`
-- Labels to create first: `setup`, `proposal`, `data`, `model`, `evaluation`, `explainability`, `release`, `priority:high`, `priority:medium`, `priority:low`
+- Labels: `data`, `model`, `evaluation`, `explainability`, `proposal`, `release`, `priority:high`, `priority:medium`, `priority:low`
 
 ## Ownership Note
-- This is a shared project; both teammates contribute to implementation and proposal completion.
-- Current split for speed: setup/GitHub workflow is led by Jabez, while proposal drafting is led by Grant.
-- Assignees should reflect the current lead, with the other teammate added as collaborator/reviewer when needed.
 
-## 1) Set up repository structure
-**Title:** Set up repository structure
-**Current lead:** Jabez
-**Labels:** `setup`, `priority:high`
+- This is still a shared project effort.
+- Current lead split for speed: Jabez leads implementation/data/model work, Grant leads proposal/report polish.
+- Assignees should reflect the current lead, with the second teammate added for review or paired updates when needed.
+
+## 1) Clean dataset and standardize labels
+**Title:** Clean dataset and standardize labels
+**Current lead:** Grant
+**Labels:** `data`, `priority:high`
 **Milestone:** `v0.1`
 **Initial board column:** `To Do`
 **Body:**
-- Confirm Week 1 folder layout is complete
-- Validate required starter files exist (`README.md`, `requirements.txt`, `.gitignore`, `docs/`, `data/`, `src/`, `notebooks/`, `results/`)
-- Add any missing placeholders or README notes
+- Validate raw dataset location and class folders under `data/raw/`
+- Run `scripts/clean_dataset.py` with reproducible options
+- Remove invalid/corrupt/duplicate images and normalize labels
+- Save cleaning summary to `outputs/cleaning_summary.json`
 
 **Acceptance criteria:**
-- Folder structure matches project plan
-- Required starter files are present and committed
-- Root `README.md` has setup and run instructions
-- `.gitignore` prevents large dataset/checkpoint artifacts from being committed
+- Cleaning script runs end-to-end with a documented command
+- Cleaned dataset is written to `data/cleaned/`
+- Summary JSON includes total/valid/skipped counts and per-class counts
+- Output is reproducible on a fresh machine
 
-## 2) Finalize proposal draft
-**Title:** Finalize proposal draft
-**Current lead:** Grant
-**Labels:** `proposal`, `priority:high`
-**Milestone:** `v0.1`
-**Initial board column:** `In Progress`
-**Body:**
-- Complete `docs/proposal.docx`
-- Export and update `docs/proposal.pdf`
-- Ensure problem statement, dataset, model plan, and timeline are finalized
-
-**Acceptance criteria:**
-- Proposal has complete sections: problem, dataset, method, timeline, risks
-- `proposal.docx` and `proposal.pdf` match latest version
-- Proposal is reviewed by both teammates once before submission
-
-## 3) Prepare dataset download and folder structure
-**Title:** Prepare dataset download and folder structure
+## 2) Finalize reproducible train/val/test splits
+**Title:** Finalize reproducible train/val/test splits
 **Current lead:** Jabez
 **Labels:** `data`, `priority:high`
 **Milestone:** `v0.1`
 **Initial board column:** `To Do`
 **Body:**
-- Verify `data/download_dataset.py` instructions
-- Download NEU dataset from selected Kaggle source
-- Extract into `data/raw/` with expected class folders
-- Document dataset source and structure in `data/README.md`
+- Run `scripts/split_dataset.py` on cleaned data
+- Use fixed seed and 80/10/10 ratio
+- Preserve class folder structure in each split
+- Save split summary to `outputs/split_summary_table.csv`
 
 **Acceptance criteria:**
-- Dataset is downloadable with clear, reproducible steps
-- `data/raw/` structure matches what training code expects
-- `data/README.md` includes source link, license note, and class distribution summary
-- Team can run download/setup flow on a fresh machine
+- `data/splits/train`, `data/splits/val`, and `data/splits/test` exist
+- Split is class-aware and reproducible with the same seed
+- Summary table includes per-class and total counts
+- Commands are documented in `README.md`
 
-## 4) Implement baseline CNN classifier
-**Title:** Implement baseline CNN classifier
+## 3) Complete EDA notebook for checkpoint
+**Title:** Complete EDA notebook for checkpoint
+**Current lead:** Grant (shared with Jabez)
+**Labels:** `evaluation`, `priority:high`
+**Milestone:** `v0.1`
+**Initial board column:** `In Progress`
+**Body:**
+- Finalize `notebooks/eda.ipynb` sections
+- Include class distribution, sample images, image dimension analysis, and pixel intensity plot
+- Add observations and conclusion markdown
+- Export key figures to `outputs/eda_figures/`
+
+**Acceptance criteria:**
+- Notebook runs from top to bottom without manual edits
+- EDA visuals are saved for report screenshots
+- Observations include dataset size, class count, split ratios, and imbalance note
+- Conclusion summarizes data quality and risks
+
+## 4) Train ML and CNN baselines
+**Title:** Train ML and CNN baselines
 **Current lead:** Jabez (shared with Grant)
 **Labels:** `model`, `priority:high`
 **Milestone:** `v0.1`
 **Initial board column:** `Backlog`
 **Body:**
-- Build baseline model in `src/model.py`
-- Add training pipeline in `src/train.py`
-- Add inference script in `src/predict.py`
-- Save first baseline results under `results/`
+- Train ML baseline with `scripts/train_ml_baseline.py`
+- Train CNN baseline with `scripts/train_cnn_baseline.py`
+- Store outputs in `metrics/`, `experiments/`, and `models/`
+- Append both runs to `metrics/baseline_comparison.csv`
 
 **Acceptance criteria:**
-- Training runs end-to-end without manual file edits
-- Inference script works on at least one sample image
-- Baseline metrics are saved under `results/`
-- Core training/inference commands are documented in `README.md`
+- ML and CNN training commands complete successfully
+- Metrics JSON and confusion matrices are generated
+- CNN history/learning curve files are generated
+- Baseline comparison CSV contains both model rows
 
-## 5) Add evaluation metrics
-**Title:** Add evaluation metrics
-**Current lead:** Jabez (shared with Grant)
+## 5) Log initial metrics and checkpoint evidence
+**Title:** Log initial metrics and checkpoint evidence
+**Current lead:** Grant (shared with Jabez)
 **Labels:** `evaluation`, `priority:medium`
 **Milestone:** `v0.1`
 **Initial board column:** `Backlog`
 **Body:**
-- Compute Accuracy and F1 Score
-- Generate confusion matrix
-- Add false alarm rate calculation
-- Report metrics in `results/` and summarize in project README
+- Update `metrics/initial_metrics.md` with latest baseline values
+- Ensure evidence artifacts are linked in docs
+- Add or refresh confusion matrices and summary tables
+- Cross-check that metric file names are consistent across docs
 
 **Acceptance criteria:**
-- Metrics include accuracy, F1, confusion matrix, false alarm rate
-- Metrics are reproducibly generated from latest model outputs
-- A concise results summary is added to `README.md`
+- Initial metrics markdown matches latest JSON/CSV outputs
+- Evidence links in docs resolve to real files
+- Baseline comparison and confusion matrices are present
+- Metrics are traceable to reproducible commands
 
-## 6) Add Grad-CAM visualization
-**Title:** Add Grad-CAM visualization
+## 6) Add explainability and prototype components
+**Title:** Add explainability and prototype components
 **Current lead:** Jabez (shared with Grant)
 **Labels:** `explainability`, `priority:medium`
 **Milestone:** `v0.1`
 **Initial board column:** `Backlog`
 **Body:**
-- Implement Grad-CAM in `src/gradcam.py`
-- Generate visual explanations for sample predictions
-- Save visualization outputs to `results/`
-- Add usage notes to README
+- Generate Grad-CAM samples with `gradcam_predict.py`
+- Validate NLP prototype run and output file
+- Validate RL stub run and early learning curve output
+- Document result locations in report/docs
 
 **Acceptance criteria:**
-- Grad-CAM runs for at least one defective and one non-defective sample
-- Heatmap outputs are saved under `results/`
-- Usage instructions are documented clearly
+- Grad-CAM outputs exist under `experiments/gradcam/`
+- NLP output exists in `metrics/nlp_prototype_output.json`
+- RL output exists in `metrics/rl_stub_metrics.json` and `experiments/rl_learning_curves.png`
+- Commands and artifacts are documented for reviewers
 
-## 7) Prepare v0.1 release
-**Title:** Prepare v0.1 release
+## 7) Prepare Week 2 checkpoint package and release
+**Title:** Prepare Week 2 checkpoint package and release
 **Current lead:** Shared (Jabez + Grant)
 **Labels:** `release`, `priority:medium`
 **Milestone:** `v0.1`
 **Initial board column:** `Backlog`
 **Body:**
-- Confirm proposal artifacts are complete
-- Confirm baseline code is organized and runnable
-- Tag release as `v0.1`
-- Publish release notes summarizing scope and known gaps
+- Finalize `docs/checkpoint_report.md` (1-2 pages)
+- Verify report includes screenshots and code evidence
+- Ensure `docs/model_card.md` and `docs/ethics_statement.md` are updated
+- Create and push `v0.1` tag when all blocker tasks are complete
 
 **Acceptance criteria:**
-- Tag `v0.1` exists
-- Release notes include implemented features, known limitations, and next steps
-- Repository has no blocker issues labeled `priority:high` left open for v0.1
+- Checkpoint report is complete and submission-ready
+- Model card and ethics docs reflect current experiments
+- No open `priority:high` blocker issues remain for Week 2 scope
+- `v0.1` tag is created and pushed
 
-## GitHub issue template block
-Use the following reusable block while creating each issue:
 
-```markdown
-Title: <issue title>
-Labels: <label list>
-Milestone: v0.1
-Project: Manufacturing Defect Detection
-
-Description
-- <task item>
-- <task item>
-
-Acceptance Criteria
-- <success condition>
-- <success condition>
-```
-
-## Suggested issue order for this week
-1. Set up repository structure
-2. Prepare dataset download and folder structure
-3. Finalize proposal draft
-4. Implement baseline CNN classifier
-5. Add evaluation metrics
-6. Add Grad-CAM visualization
-7. Prepare v0.1 release
