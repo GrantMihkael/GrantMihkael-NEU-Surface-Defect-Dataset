@@ -1,135 +1,81 @@
-# Manufacturing Defect Detection using CNN and Grad-CAM
+# NEU Surface Defect Dataset Project
 
-## Project Overview
-This project is an academic prototype for classifying steel surface defects using the NEU Surface Defect Database. The model predicts one of six defect classes and uses Grad-CAM to visualize which image regions influence predictions.
+This repository is organized to satisfy Week 2 project requirements for data readiness, reproducible splits, EDA, ML/DL baselines, NLP prototype, RL stub, and documentation artifacts.
 
-This repository follows the 6INTELSY AY2526 final project guideline: include CNN, NLP, and RL components, plus reproducible training/evaluation artifacts and ethics documentation.
+## Project Structure
 
-## Intended Use & Limitations
-This system is designed for academic research and classroom experimentation on defect classification. It is not intended for direct deployment in production quality-control systems without additional validation, calibration, and domain testing.
+- `data/raw/`: raw acquired dataset
+- `data/cleaned/`: cleaned dataset after deduplication/validation
+- `data/splits/`: reproducible train/val/test splits
+- `scripts/`: data prep and baseline training scripts
+- `notebooks/eda.ipynb`: EDA notebook
+- `metrics/`: JSON/CSV metrics outputs
+- `outputs/`: checkpoint summaries and exported EDA figures
+- `experiments/`: training curves and experimental artifacts
+- `models/`: saved model checkpoints
+- `nlp/`: NLP scaffold/prototype
+- `rl/`: RL environment and agent stub
+- `docs/`: model card, ethics statement, data and GitHub setup docs
+
+## Week 2 Data Prep Structure
+
+Use this simple structure for the checkpoint:
+
+- `data/raw/`: class-based raw dataset (`data/raw/<class_name>/*.jpg`)
+- `data/cleaned/`: cleaned images with preserved class folders
+- `data/splits/`: finalized train/val/test folders by class
+- `notebooks/`: EDA notebook(s)
+- `scripts/`: cleaning and splitting scripts
+- `outputs/`: generated tables, figures, and logs
 
 ## Quick Start
-1. Create and activate a Python virtual environment.
-2. Install dependencies:
-   `pip install -r requirements.txt`
-3. Prepare dataset instructions:
-   `python data/download_dataset.py`
-4. Place extracted dataset under `data/raw/` using class folders listed by the script.
-5. Run one-command reproducibility scaffold:
-  `bash run.sh`
 
-## Defect Classes
-- Crazing
-- Inclusion
-- Patches
-- Pitted Surface
-- Rolled-in Scale
-- Scratches
+Recommended (Windows PowerShell):
 
-## Evaluation Metrics
-- Accuracy
-- F1 Score
-- Confusion Matrix
-- False Alarm Rate
+- Activate venv: `& ".\\.venv\\Scripts\\Activate.ps1"`
 
-## Required Components (Course Guideline)
-- CNN: Defect classification backbone with Grad-CAM explainability.
-- NLP: Planned supporting NLP component for documentation/metadata analysis.
-- RL: Planned lightweight RL component (e.g., threshold tuning or policy optimization).
+1. Place raw data under `data/raw/` using either layout:
+   - `data/raw/<class_name>/<images>`
+   - `data/raw/<dataset_name>/<class_name>/<images>`
+2. Run cleaning:
+   - `python scripts/clean_dataset.py --raw-dir data/raw --cleaned-dir data/cleaned --summary outputs/cleaning_summary.json --normalize-filenames`
+   - optional resize: add `--resize-width 224 --resize-height 224`
+3. Create reproducible splits:
+   - `python scripts/split_dataset.py --cleaned-dir data/cleaned --out-dir data/splits --train-ratio 0.8 --val-ratio 0.1 --seed 42 --summary-csv outputs/split_summary_table.csv`
+4. Open EDA notebook:
+   - `jupyter notebook notebooks/eda.ipynb`
+5. Run baselines (optional for later stages):
+   - `python scripts/train_ml_baseline.py --splits-dir data/splits`
+   - `python scripts/train_cnn_baseline.py --splits-dir data/splits --epochs 10`
+6. Run NLP prototype:
+   - `python nlp/prototype.py`
+7. Run RL stub experiment:
+   - `python rl/run_stub_experiment.py`
 
-## 6) GitHub Repository (Required Structure)
-```text
-manufacturing-defect-detection/
-  README.md                          # project overview, quick start, results highlights, team
-  LICENSE
-  requirements.txt                   # python dependencies
-  run.sh | Makefile                  # one-command reproduce
-  data/
-    README.md                        # how to obtain data (no raw PII in repo)
-    download_dataset.py              # dataset setup helper and folder expectations
-  src/
-    data_pipeline.py                 # preprocessing and data loading scaffold
-    model.py                         # CNN architecture definition
-    models/                          # CNN/NLP architecture modules
-    train.py                         # training script (current scaffold)
-    eval.py                          # evaluation script scaffold
-    rl_agent.py                      # RL component scaffold
-    predict.py                       # inference script (current scaffold)
-    gradcam.py                       # Grad-CAM generation utilities
-    utils/                           # utility helpers
-  notebooks/
-    baseline.ipynb                   # EDA/baseline notebook
-  experiments/
-    configs/                         # experiment configs
-    logs/                            # training logs, curves
-    results/                         # tables, plots, figures
-  results/                           # current metrics, plots, and model outputs
-  docs/
-    proposal.pdf                     # project proposal
-    proposal.docx                    # editable proposal source
-    model_card.md                    # model card (week 1 draft)
-    ethics_statement.md              # ethics statement (week 1 draft)
-    checkpoint.pdf                   # week 2 checkpoint report (planned)
-    final_report.pdf                 # week 3 final report (planned)
-    slides.pdf                       # final slides (planned)
-    release-notes-v0.1.md            # release notes
-    github-issues.md                 # issue list reference
-    project-board-columns.md         # board workflow reference
-```
+Note:
 
-## Ethics & Policy Statement (Draft)
+- Older `*_combined` artifacts may still exist from previous runs.
+- Week 2 checkpoint flow in this README uses `data/cleaned`, `data/splits`, and `outputs/*` files.
 
-### 1. Intended Use & Limitations
-- This work supports learning and research on computer vision for industrial defect detection.
-- Outputs must be interpreted as decision support, not as a standalone final quality verdict.
+## Week 2 README Snippet
 
-### 2. Ethics Risk Register (Top 3 Risks)
-| # | Risk | Likelihood | Impact | Mitigation |
-|---|------|------------|--------|------------|
-| 1 | Class imbalance bias (some defect types underrepresented) | Medium | High | Track per-class metrics, apply balanced sampling/augmentation, and report class-wise performance |
-| 2 | False negatives in safety-critical inspection flow | Medium | High | Optimize recall for defect classes, use threshold tuning, and require human verification for uncertain predictions |
-| 3 | Over-trust in model explanations (Grad-CAM misuse) | Medium | Medium | Document Grad-CAM limits and treat heatmaps as supporting evidence only |
+Expected input/output folders for checkpoint scripts:
 
-### 3. Fairness Checks (Planned)
-- Compare performance across all defect categories, not only overall accuracy.
-- Review confusion matrix for systematic under-detection of specific classes.
-- Report macro and weighted F1 to avoid majority-class masking.
+- Input raw data: `data/raw/<class_name>/<images>`
+- Cleaning output: `data/cleaned/<class_name>/<images>` and `outputs/cleaning_summary.json`
+- Split output: `data/splits/train|val|test/<class_name>/<images>` and `outputs/split_summary_table.csv`
+- EDA notebook: `notebooks/eda.ipynb` (reads from `data/splits`)
 
-### 4. Privacy & Data Governance
-- Dataset source is a public research dataset; no personal user data is collected in this project.
-- No hidden data collection is performed during experiments.
-- Dataset and references must be cited with license/source attribution.
+## Key Week 2 Evidence Files
 
-### 5. Misuse Considerations
-- This model must not be used to replace required industrial safety protocols without full validation.
-- It should not be presented as universally reliable beyond the evaluated dataset domain.
-
-### 6. Transparency
-- Model architecture, training setup, and evaluation metrics are documented in this repository.
-- Known limitations and failure cases should be reported in release notes and final report.
-
-## Results Highlights
-- Baseline and model result artifacts are stored in `results/`.
-- Visualization and analysis experiments are tracked in `notebooks/baseline.ipynb`.
-
-## Week 1 Submission Status
-- Proposal documents: completed (`docs/proposal.pdf`, `docs/proposal.docx`)
-- Repository setup and issue planning docs: completed
-- Data setup instructions and governance notes: completed
-- Model card and ethics statement drafts: completed
-- CNN/NLP/RL implementation depth: scaffolded for Week 2 and Week 3 completion
-
-## Milestones
-- `v0.1`: Proposal and repository setup
-- `v0.9`: Release candidate with baseline training/evaluation outputs
-- `v1.0`: Final project submission
-
-## Deliverables Checklist (v1.0)
-- `README.md` with quick start and results summary
-- `requirements.txt` (or `environment.yml`) and one-command repro script
-- `docs/proposal.pdf`, `docs/checkpoint.pdf`, `docs/final_report.pdf`, and `docs/slides.pdf`
-- `docs/model_card.md` and `docs/ethics_statement.md`
-- Ablation and error/slice analysis outputs in experiment/result folders
-
-## Team
-- Add member names and roles here.
+- Data cleaning summary: `outputs/cleaning_summary.json`
+- Split summary: `outputs/split_summary_table.csv`
+- EDA notebook: `notebooks/eda.ipynb`
+- EDA exported figures: `outputs/eda_figures/`
+- Baseline metrics: `metrics/ml_baseline_metrics.json`, `metrics/cnn_baseline_metrics.json`
+- Baseline comparison: `metrics/baseline_comparison.csv`
+- CNN learning curves: `experiments/cnn_learning_curves.png`
+- RL learning curves: `experiments/rl_learning_curves.png`
+- Model card draft: `docs/model_card.md`
+- Ethics statement: `docs/ethics_statement.md`
+- GitHub setup notes: `docs/github_setup.md`
