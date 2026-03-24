@@ -1,0 +1,55 @@
+{
+  "source_metrics_json": "results/tables/baseline_resnet18_metrics.json",
+  "model": null,
+  "normal_class": "clean_sample",
+  "anomaly_classes": [
+    "be_injured_by_a_collision",
+    "coating_cracking",
+    "convex_powder",
+    "crazing",
+    "dirty_spot",
+    "drain_bottom",
+    "inclusion",
+    "non_conducting",
+    "orange_peel",
+    "patches",
+    "pitted_surface",
+    "pitting",
+    "rolled_in_scale",
+    "scratches",
+    "scuffing",
+    "the_transverse_strip_is_dented"
+  ],
+  "binary_confusion_matrix": {
+    "layout": "rows=true labels [normal, anomaly], cols=pred labels [normal, anomaly]",
+    "matrix": [
+      [
+        92,
+        11
+      ],
+      [
+        1,
+        293
+      ]
+    ]
+  },
+  "metrics": {
+    "total_samples": 397,
+    "tp": 293,
+    "tn": 92,
+    "fp": 11,
+    "fn": 1,
+    "accuracy_binary": 0.9697732997481109,
+    "anomaly_precision": 0.9638157894736842,
+    "anomaly_recall": 0.9965986394557823,
+    "anomaly_f1": 0.979933110367893,
+    "normal_precision": 0.989247311827957,
+    "normal_recall": 0.8932038834951457,
+    "normal_f1": 0.9387755102040817,
+    "macro_f1_binary": 0.9593543102859874,
+    "balanced_accuracy": 0.9449012614754639,
+    "specificity_normal": 0.8932038834951457,
+    "false_alarm_rate": 0.10679611650485436,
+    "miss_rate": 0.003401360544217687
+  }
+}

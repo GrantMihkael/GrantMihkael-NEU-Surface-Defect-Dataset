@@ -1,0 +1,6 @@
+model,accuracy,precision_weighted,recall_weighted,f1_weighted
+LogisticRegression(flattened_grayscale,combined),0.5718,0.5790,0.5718,0.5501
+SimpleCNN,0.8741,0.8758,0.8741,0.8641
+LogisticRegression(flattened_grayscale),0.5718,0.5810,0.5718,0.5492
+SimpleCNN,0.8212,0.7794,0.8212,0.7863
+SimpleCNN,0.9093,0.9153,0.9093,0.9067
