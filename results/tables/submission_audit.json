@@ -1,0 +1,46 @@
+{
+  "results_dir": "results",
+  "requirements": {
+    "min_ablations": 2,
+    "max_runtime_minutes": 90.0
+  },
+  "runtime": {
+    "runtime_json": "results/tables/pipeline_runtime.json",
+    "runtime_minutes": 0.0,
+    "runtime_limit_minutes": 90.0
+  },
+  "artifacts": {
+    "baseline_metrics": "results/tables/baseline_resnet18_metrics.json",
+    "baseline_history": "results/tables/baseline_resnet18_history.csv",
+    "baseline_confusion_matrix": "results/tables/baseline_resnet18_confusion_matrix.csv",
+    "final_results_table": "results/tables/final_results_table.csv",
+    "anomaly_metrics": "results/tables/baseline_resnet18_anomaly_metrics.json",
+    "anomaly_confusion_matrix": "results/tables/baseline_resnet18_anomaly_confusion_matrix.csv",
+    "ablation_metrics": [
+      "results/tables/ablation_low_resolution_metrics.json",
+      "results/tables/ablation_no_augmentation_metrics.json"
+    ],
+    "plots": [
+      "results/plots/baseline_resnet18_loss.png",
+      "results/plots/baseline_resnet18_accuracy.png",
+      "results/plots/baseline_resnet18_confusion_matrix.png"
+    ],
+    "analysis": [
+      "results/analysis/baseline_resnet18_misclassified.csv",
+      "results/analysis/baseline_resnet18_slice_per_class.csv"
+    ]
+  },
+  "checks": {
+    "baseline_metrics": true,
+    "baseline_history": true,
+    "baseline_confusion_matrix": true,
+    "final_results_table": true,
+    "anomaly_metrics": true,
+    "anomaly_confusion_matrix": true,
+    "plots_present": true,
+    "error_and_slice_analysis_present": true,
+    "ablations_count_ok": true,
+    "runtime_90min_ok": true
+  },
+  "overall_pass": true
+}

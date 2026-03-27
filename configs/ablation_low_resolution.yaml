@@ -1,0 +1,12 @@
+run_name: ablation_low_resolution
+seed: 42
+splits_dir: data/splits
+results_dir: results
+checkpoint_dir: models/submission
+model_name: resnet18
+img_size: 128
+batch_size: 16
+epochs: 10
+learning_rate: 0.001
+num_workers: 0
+use_augmentation: true

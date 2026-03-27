@@ -6,6 +6,8 @@ import shutil
 from pathlib import Path
 
 
+# Requirement tag: train/val/test split creation with no leakage.
+# Images are copied into disjoint split folders, preventing path overlap across splits.
 def is_image_file(path: Path) -> bool:
     return path.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 

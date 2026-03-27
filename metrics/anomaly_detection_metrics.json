@@ -1,0 +1,50 @@
+{
+  "source_metrics_json": "metrics/cnn_baseline_metrics.json",
+  "model": "SimpleCNN",
+  "normal_class": "clean_sample",
+  "anomaly_classes": [
+    "be_injured_by_a_collision",
+    "coating_cracking",
+    "convex_powder",
+    "crazing",
+    "dirty_spot",
+    "drain_bottom",
+    "inclusion",
+    "non_conducting",
+    "orange_peel",
+    "patches",
+    "pitted_surface",
+    "pitting",
+    "rolled_in_scale",
+    "scratches",
+    "scuffing",
+    "the_transverse_strip_is_dented"
+  ],
+  "binary_confusion_matrix": {
+    "layout": "rows=true labels [normal, anomaly], cols=pred labels [normal, anomaly]",
+    "matrix": [
+      [
+        98,
+        5
+      ],
+      [
+        12,
+        282
+      ]
+    ]
+  },
+  "metrics": {
+    "total_samples": 397,
+    "tp": 282,
+    "tn": 98,
+    "fp": 5,
+    "fn": 12,
+    "accuracy_binary": 0.9571788413098237,
+    "anomaly_precision": 0.9825783972125436,
+    "anomaly_recall": 0.9591836734693877,
+    "anomaly_f1": 0.9707401032702239,
+    "specificity_normal": 0.9514563106796117,
+    "false_alarm_rate": 0.04854368932038835,
+    "miss_rate": 0.04081632653061224
+  }
+}

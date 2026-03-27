@@ -1,0 +1,24 @@
+{
+  "checkpoint_path": "models\\submission\\ablation_low_resolution_best.pth",
+  "history_path": "results\\tables\\ablation_low_resolution_history.csv",
+  "class_names": [
+    "be_injured_by_a_collision",
+    "clean_sample",
+    "coating_cracking",
+    "convex_powder",
+    "crazing",
+    "dirty_spot",
+    "drain_bottom",
+    "inclusion",
+    "non_conducting",
+    "orange_peel",
+    "patches",
+    "pitted_surface",
+    "pitting",
+    "rolled_in_scale",
+    "scratches",
+    "scuffing",
+    "the_transverse_strip_is_dented"
+  ],
+  "best_val_acc": 0.9261213720316622
+}

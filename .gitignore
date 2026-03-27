@@ -1,37 +1,38 @@
-.DS_Store
-
 # Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
-.Python
+*.so
+*.egg-info/
 .pytest_cache/
 .mypy_cache/
+.ipynb_checkpoints/
 
 # Virtual environments
 .venv/
 venv/
-env/
-.tmp_pdf_env/
+.env/
+
+# Data and generated artifacts
+metrics/nlp_prototype_output.json
 
 # Jupyter
-.ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# Data and model artifacts
-data/raw/
-*.pt
-*.pth
-*.onnx
-*.ckpt
-
-# Experiment outputs
-results/*
-!results/.gitkeep
-experiments/logs/*
-!experiments/logs/.gitkeep
-experiments/results/*
-!experiments/results/.gitkeep
-
-# IDE / OS
+# OS and editor
+.DS_Store
+Thumbs.db
 .vscode/
+
+# Large local data/artifacts (do not push)
+data/raw/
+data/cleaned/
+data/cleaned_combined/
+data/splits/
+data/splits_combined/
+dataset/
+models/
+outputs/
+experiments/gradcam/
+.venv/

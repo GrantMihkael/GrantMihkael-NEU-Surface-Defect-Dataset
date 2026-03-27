@@ -1,0 +1,4 @@
+run_name,model_name,seed,test_loss,accuracy,f1_macro,false_alarm_rate,precision_weighted,recall_weighted,f1_weighted
+baseline_resnet18,resnet18,42,,,,,,,
+ablation_no_augmentation,resnet18,42,,,,,,,
+ablation_low_resolution,resnet18,42,,,,,,,
