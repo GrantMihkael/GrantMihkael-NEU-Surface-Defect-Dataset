@@ -9,6 +9,8 @@ from pathlib import Path
 def parse_args():
     parser = argparse.ArgumentParser(description="Run ablation experiments")
     parser.add_argument("--configs", nargs="+", required=True, help="Ablation config list")
+        # Requirement tag: ablation experiments (>=2 variants).
+        # Runs configured experiments such as no-augmentation and low-resolution settings.
     return parser.parse_args()
 
 

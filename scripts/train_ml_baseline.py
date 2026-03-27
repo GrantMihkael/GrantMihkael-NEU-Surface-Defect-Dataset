@@ -16,6 +16,8 @@ from sklearn.metrics import (
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+# Requirement tag: simple non-DL baseline for comparison.
+# This script trains Logistic Regression on flattened grayscale features.
 
 IMAGE_SIZE = (64, 64)
 

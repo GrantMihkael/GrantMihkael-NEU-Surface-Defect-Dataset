@@ -21,6 +21,8 @@ from .models import build_model
 from .utils import ensure_dir, save_json
 
 
+# Requirement tag: error and slice analysis outputs.
+# This module writes misclassified samples and per-class slice metrics for failure analysis.
 def _false_alarm_rate(y_true: np.ndarray, y_pred: np.ndarray) -> float:
     if len(y_true) == 0:
         return 0.0

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import textwrap
 from pathlib import Path
 
@@ -15,6 +16,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--results-dir", default="results", help="Results directory")
     parser.add_argument("--runtime-json", default="results/tables/pipeline_runtime.json", help="Runtime JSON")
     parser.add_argument("--audit-json", default="results/tables/submission_audit.json", help="Audit JSON")
+    parser.add_argument("--report-md", default="reports/INTELSY_final_project_report.md", help="Detailed markdown report")
     parser.add_argument("--output-file", default="reports/final_report.pdf", help="Output PDF path")
     return parser.parse_args()
 
@@ -67,6 +69,80 @@ def _image_page(title: str, image_paths: list[Path], captions: list[str], pdf: P
     plt.close(fig)
 
 
+def _parse_md_image(line: str) -> tuple[str, Path] | None:
+    m = re.match(r"!\[(.*?)\]\((.*?)\)", line.strip())
+    if not m:
+        return None
+    caption = m.group(1).strip() or "Figure"
+    path = Path(m.group(2).strip())
+    return caption, path
+
+
+def _render_markdown_report(report_md: Path, pdf: PdfPages) -> bool:
+    if not report_md.exists():
+        return False
+
+    lines = report_md.read_text(encoding="utf-8").splitlines()
+    page_title = "INTELSY Final Project Report"
+    body_lines: list[str] = []
+    image_paths: list[Path] = []
+    image_captions: list[str] = []
+
+    def flush_text_page() -> None:
+        nonlocal body_lines, page_title
+        if body_lines:
+            _new_page(page_title, body_lines, pdf)
+            body_lines = []
+
+    def flush_image_page() -> None:
+        nonlocal image_paths, image_captions
+        if image_paths:
+            _image_page("Report Figures", image_paths, image_captions, pdf)
+            image_paths = []
+            image_captions = []
+
+    for raw in lines:
+        line = raw.strip()
+
+        if not line:
+            body_lines.append("")
+            if len(body_lines) >= 30:
+                flush_text_page()
+            continue
+
+        img = _parse_md_image(line)
+        if img:
+            caption, path = img
+            if not path.is_absolute():
+                path = report_md.parent / path
+            image_paths.append(path)
+            image_captions.append(caption)
+            if len(image_paths) >= 2:
+                flush_image_page()
+            continue
+
+        if line.startswith("# "):
+            flush_text_page()
+            flush_image_page()
+            page_title = line[2:].strip()
+            continue
+
+        if line.startswith("## "):
+            body_lines.append(line[3:].strip())
+            body_lines.append("")
+        elif line.startswith("### "):
+            body_lines.append(line[4:].strip())
+        else:
+            body_lines.append(line)
+
+        if len(body_lines) >= 34:
+            flush_text_page()
+
+    flush_text_page()
+    flush_image_page()
+    return True
+
+
 def main() -> None:
     args = parse_args()
     results_dir = Path(args.results_dir)
@@ -78,11 +154,16 @@ def main() -> None:
     anomaly = _load_json(tables / "baseline_resnet18_anomaly_metrics.json") or {}
     runtime = _load_json(Path(args.runtime_json)) or {}
     audit = _load_json(Path(args.audit_json)) or {}
+    report_md = Path(args.report_md)
 
     out_path = Path(args.output_file)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     with PdfPages(out_path) as pdf:
+        if _render_markdown_report(report_md, pdf):
+            print(f"Saved: {out_path}")
+            return
+
         page1 = [
             "Project: Metal Surface Defect Anomaly Detection",
             "Format: Conference-style concise final report.",

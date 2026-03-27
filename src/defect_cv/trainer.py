@@ -12,6 +12,9 @@ from .data import build_dataloaders
 from .models import build_model
 from .utils import ensure_dir, set_seed
 
+# Requirement tag: fixed seeds + logged training artifacts.
+# Seed is fixed from config, epoch metrics are saved to CSV, and best checkpoint is selected by val accuracy.
+
 
 def _epoch_train(model, loader, criterion, optimizer, device):
     model.train()

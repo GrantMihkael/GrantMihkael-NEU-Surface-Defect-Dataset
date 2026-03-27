@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+
 import cv2
 import numpy as np
 import torch
@@ -397,7 +398,11 @@ def pick_image_file() -> Path | None:
 
 
 def prompt_image_path() -> Path | None:
-    raw = input("Paste/drag image path (or press Enter to cancel): ").strip()
+    try:
+        raw = input("Paste/drag image path (or press Enter to cancel): ").strip()
+    except KeyboardInterrupt:
+        print("\nCancelled.")
+        return None
     if not raw:
         return None
     return Path(raw.strip('"').strip("'"))
@@ -524,6 +529,9 @@ def main() -> None:
         except EOFError:
             print("\nExiting anomaly CLI.")
             break
+        except KeyboardInterrupt:
+            print("\nExiting anomaly CLI.")
+            break
 
         if raw.lower() in {"q", "quit", "exit"}:
             print("Exiting anomaly CLI.")
@@ -585,4 +593,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\nExiting anomaly CLI.")

@@ -20,6 +20,8 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
 
+# Requirement tag: DL baseline for comparison against non-DL models.
+# This script trains/evaluates a compact CNN and logs metrics + confusion matrix.
 class SimpleCNN(nn.Module):
     def __init__(self, num_classes: int):
         super().__init__()
